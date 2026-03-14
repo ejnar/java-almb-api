@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: User API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:8080
+
+paths:
+  /users:
+    get:
+      summary: Get users
+      operationId: getUsers
+      responses:
+        "200":
+          description: list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      summary: Create user
+      operationId: createUser
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateUser"
+      responses:
+        "201":
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+
+components:
+
+  schemas:
+    CreateUser:
+      type: object
+      required:
+        - name
+        - email
+      properties:
+        name:
+          type: string
+          minLength: 2
+        email:
+          type: string
+          format: email
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        email:
+          type: string
