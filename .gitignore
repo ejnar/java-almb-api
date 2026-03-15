@@ -3,6 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .kotlin
+.gradle/
+.idea/
+logs/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
