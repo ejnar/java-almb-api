@@ -1,4 +1,4 @@
-package org.almb.mapper;
+package org.almb.adapter.mapper;
 
 import org.almb.adapter.in.web.dto.Company;
 import org.almb.adapter.in.web.dto.CreateCompany;

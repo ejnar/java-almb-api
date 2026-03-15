@@ -6,7 +6,7 @@ import org.almb.adapter.in.web.dto.Profitability;
 import org.almb.adapter.out.persistence.entity.CompanyEntity;
 import org.almb.adapter.out.persistence.entity.ProfitabilityEmbeddable;
 import org.almb.adapter.out.persistence.repository.CompanyRepository;
-import org.almb.mapper.CompanyMapper;
+import org.almb.adapter.mapper.CompanyMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

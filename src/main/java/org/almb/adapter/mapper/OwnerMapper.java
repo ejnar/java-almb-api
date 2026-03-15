@@ -1,4 +1,4 @@
-package org.almb.mapper;
+package org.almb.adapter.mapper;
 
 import org.almb.adapter.in.web.dto.CreateOwner;
 import org.almb.adapter.in.web.dto.Owner;

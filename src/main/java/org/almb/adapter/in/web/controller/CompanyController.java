@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class CompanyController implements CompaniesApi {
+public class CompanyController implements org.almb.adapter.in.web.controller.CompaniesApi {
 
     private final CompanyService service;
 

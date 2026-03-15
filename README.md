@@ -1,13 +1,52 @@
 # java-almb-api
 
-Test project for SPring Booot app(Docker, OpenApi)
+**java-almb-api** is a Spring Boot project demonstrating a contract-first approach using OpenAPI. It exposes REST APIs and includes database persistence, validation, and auto-generated API code from an OpenAPI specification.
 
-## Start application
+---
 
-How to Run
+## Project Overview
 
-Enable annotation processing in IntelliJ:
-Preferences → Build, Execution, Deployment → Compiler → Annotation Processors → Enable
+- **Group ID:** `org.almb`
+- **Artifact ID:** `java-almb-api`
+- **Version:** `1.0-SNAPSHOT`
+- **Packaging:** JAR
+- **Java Version:** 21
+- **Spring Boot Version:** 4.0.3
+- **OpenAPI Generator Version:** 7.5.0
+- **MapStruct Version:** 1.5.5.Final
+
+This project uses Spring Boot with a web, data JPA, validation, H2 in-memory database, and OpenAPI integration.
+
+---
+
+## Features
+
+- Spring Boot REST API
+- Hexagonal architecture 
+- Contract-first API generation using OpenAPI
+- Automatic Swagger UI documentation
+- In-memory H2 database for testing
+- Validation for request payloads
+- MapStruct for DTO mapping
+- Actuator for monitoring
+- Unit testing with Spring Boot Test and Mockito
+
+---
+
+
+## Getting Started
+
+### Prerequisites
+
+- Java 21
+- Maven 3.8+
+- Git (optional)
+
+### Build the Project
+
+```bash
+git clone <repository-url>
+cd java-almb-api
 
 Generate OpenAPI classes:
 mvn clean compile
@@ -16,16 +55,11 @@ Generate OpenAPI code + compile:
 mvn clean install
 
 Run Spring Boot locally:
-mvn spring-boot:run
-
-Run Docker:
-docker compose up --build
+mvn clean spring-boot:run
+```
 
 Swagger UI:
 http://localhost:8080/swagger-ui/index.html
-
-H2 Console:
-http://localhost:8080/h2-console
 
 Health check:
 http://localhost:8080/actuator/health
@@ -35,10 +69,12 @@ http://localhost:8080/actuator/metrics
 
 Info:
 http://localhost:8080/actuator/info
+´´´
 
 Improvment:
-Add mockito lib for unit testing
-
+- Add missing unit test
+- Hexagonal architecture, not complete
+- Add reactive design(WebFlux), for better performance 
 
 
 
