@@ -1,31 +1,28 @@
 package org.almb.adapter.out.persistence.entity;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
-import java.util.List;
 import java.util.Objects;
 
-@Entity
 @Table(name = "companies")
 public class CompanyEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private String cvr;
 
+    @Column
     private String phoneNumber;
 
-    @Embedded
-    private ProfitabilityEmbeddable profitability;
+    private Double revenue;
 
-    @Embedded
-    private AddressEmbeddable address;
+    private Double expenses;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    private List<OwnerEntity> owners;
+    private Double netProfit;
 
     public Long getId() {
         return id;
@@ -47,28 +44,28 @@ public class CompanyEntity {
         this.phoneNumber = phoneNumber;
     }
 
-    public ProfitabilityEmbeddable getProfitability() {
-        return profitability;
+    public Double getRevenue() {
+        return revenue;
     }
 
-    public void setProfitability(ProfitabilityEmbeddable profitability) {
-        this.profitability = profitability;
+    public void setRevenue(Double revenue) {
+        this.revenue = revenue;
     }
 
-    public AddressEmbeddable getAddress() {
-        return address;
+    public Double getExpenses() {
+        return expenses;
     }
 
-    public void setAddress(AddressEmbeddable address) {
-        this.address = address;
+    public void setExpenses(Double expenses) {
+        this.expenses = expenses;
     }
 
-    public List<OwnerEntity> getOwners() {
-        return owners;
+    public Double getNetProfit() {
+        return netProfit;
     }
 
-    public void setOwners(List<OwnerEntity> owners) {
-        this.owners = owners;
+    public void setNetProfit(Double netProfit) {
+        this.netProfit = netProfit;
     }
 
     @Override
@@ -83,15 +80,4 @@ public class CompanyEntity {
         return Objects.hashCode(id);
     }
 
-    @Override
-    public String toString() {
-        return "CompanyEntity{" +
-                "id=" + id +
-                ", cvr='" + cvr + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", profitability=" + profitability +
-                ", address=" + address +
-                ", owners=" + owners +
-                '}';
-    }
 }

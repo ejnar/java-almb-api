@@ -1,63 +1,264 @@
 openapi: 3.0.3
 info:
-  title: User API
+  title: Company Management API
+  description: REST API for managing companies, owners and profitability data
   version: 1.0.0
 
 servers:
   - url: http://localhost:8080
+    description: Local development server
 
 paths:
-  /users:
+
+  /companies:
     get:
-      summary: Get users
-      operationId: getUsers
+      summary: Get all companies
+      operationId: getCompanies
+      tags:
+        - Company
       responses:
         "200":
-          description: list of users
+          description: List of companies
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/User"
+                  $ref: "#/components/schemas/Company"
+
     post:
-      summary: Create user
-      operationId: createUser
+      summary: Create a new company
+      operationId: createCompany
+      tags:
+        - Company
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CreateUser"
+              $ref: "#/components/schemas/CreateCompany"
       responses:
         "201":
-          description: created
+          description: Company created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/Company"
+
+  /companies/{cvr}:
+    get:
+      summary: Get company by CVR
+      operationId: getCompanyByCvr
+      tags:
+        - Company
+      parameters:
+        - name: cvr
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Danish CVR number
+      responses:
+        "200":
+          description: Company found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Company"
+        "404":
+          description: Company not found
+
+    delete:
+      summary: Delete company
+      operationId: deleteCompany
+      tags:
+        - Company
+      parameters:
+        - name: cvr
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Company deleted
+
+  /companies/{cvr}/profitability:
+    get:
+      summary: Get profitability for company
+      operationId: getCompanyProfitability
+      tags:
+        - Profitability
+      parameters:
+        - name: cvr
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Profitability information
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Profitability"
+        "404":
+          description: Company not found
+
+  /owners:
+    get:
+      summary: Get all owners
+      operationId: getOwners
+      tags:
+        - Owner
+      responses:
+        "200":
+          description: List of owners
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Owner"
+
+    post:
+      summary: Create owner
+      operationId: createOwner
+      tags:
+        - Owner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateOwner"
+      responses:
+        "201":
+          description: Owner created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Owner"
 
 components:
 
   schemas:
-    CreateUser:
+
+    Address:
+      type: object
+      required:
+        - street
+        - city
+        - postalCode
+      properties:
+        street:
+          type: string
+          example: "Main Street 12"
+        city:
+          type: string
+          example: "Copenhagen"
+        postalCode:
+          type: string
+          example: "2100"
+        country:
+          type: string
+          example: "Denmark"
+
+    Owner:
       type: object
       required:
         - name
-        - email
-      properties:
-        name:
-          type: string
-          minLength: 2
-        email:
-          type: string
-          format: email
-    User:
-      type: object
+        - cpr
+        - address
       properties:
         id:
           type: integer
+          format: int64
         name:
           type: string
-        email:
+          example: "Peter Jensen"
+        cpr:
           type: string
+          description: Danish CPR number
+          example: "120987-1234"
+        address:
+          $ref: "#/components/schemas/Address"
+
+    CreateOwner:
+      type: object
+      required:
+        - name
+        - cpr
+        - address
+      properties:
+        name:
+          type: string
+        cpr:
+          type: string
+        address:
+          $ref: "#/components/schemas/Address"
+
+    Profitability:
+      type: object
+      properties:
+        revenue:
+          type: number
+          format: double
+          description: Total revenue
+          example: 5000000
+        expenses:
+          type: number
+          format: double
+          description: Total expenses
+          example: 3200000
+        netProfit:
+          type: number
+          format: double
+          description: Net profit
+          example: 1800000
+
+    Company:
+      type: object
+      required:
+        - cvr
+        - phoneNumber
+        - address
+      properties:
+        id:
+          type: integer
+          format: int64
+        cvr:
+          type: string
+          description: Danish CVR number
+          example: "12345678"
+        phoneNumber:
+          type: string
+          example: "+45 12345678"
+        address:
+          $ref: "#/components/schemas/Address"
+        profitability:
+          $ref: "#/components/schemas/Profitability"
+        owners:
+          type: array
+          items:
+            $ref: "#/components/schemas/Owner"
+
+    CreateCompany:
+      type: object
+      required:
+        - cvr
+        - phoneNumber
+        - address
+      properties:
+        cvr:
+          type: string
+        phoneNumber:
+          type: string
+        address:
+          $ref: "#/components/schemas/Address"
+        profitability:
+          $ref: "#/components/schemas/Profitability"
+        owners:
+          type: array
+          items:
+            $ref: "#/components/schemas/CreateOwner"

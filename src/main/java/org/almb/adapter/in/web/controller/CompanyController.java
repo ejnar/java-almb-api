@@ -1,45 +1,43 @@
 package org.almb.adapter.in.web.controller;
 
-
 import org.almb.adapter.in.web.dto.Company;
-import org.almb.adapter.in.web.dto.CreateCompany;
-import org.almb.adapter.in.web.dto.Profitability;
-import org.almb.application.service.CompanyService;
+import org.almb.adapter.in.web.mapper.CompanyApiMapper;
+import org.almb.domain.port.in.CompanyUseCase;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @RestController
-public class CompanyController implements CompaniesApi {
+@RequestMapping("/companies")
+public class CompanyController {
 
-    private final CompanyService service;
+    private final CompanyUseCase service;
+    private final CompanyApiMapper mapper;
 
-    public CompanyController(CompanyService service) {
+    public CompanyController(CompanyUseCase service, CompanyApiMapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
-    @Override
-    public ResponseEntity<List<Company>> getCompanies() {
-        return ResponseEntity.ok(service.getCompanies());
+    @GetMapping
+    public Flux<Company> getCompanies() {
+        return service.getCompanies().map(mapper::toApi);
     }
 
-    @Override
-    public ResponseEntity<Company> createCompany(CreateCompany createCompany) {
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(service.createCompany(createCompany));
+    @GetMapping("/{cvr}")
+    public Mono<Company> getCompany(@PathVariable String cvr) {
+        return service.getCompanyByCvr(cvr).map(mapper::toApi);
     }
 
-    @Override
-    public ResponseEntity<Company> getCompanyByCvr(String cvr) {
-        return ResponseEntity.ok(service.getCompanyByCvr(cvr));
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Mono<org.almb.adapter.in.web.dto.Company> createCompany(@RequestBody Company company) {
+        return service.createCompany(mapper.toDomain(company)).map(mapper::toApi);
     }
 
-    @Override
-    public ResponseEntity<Profitability> getCompanyProfitabilityByCvr(String cvr) {
-        return ResponseEntity.ok(service.getProfitability(cvr));
-    }
-
+  /*  @GetMapping("/{cvr}/profitability")
+    public Mono<org.almb.adapter.in.web.dto.Profitability> profitability(@PathVariable String cvr) {
+        return service.getProfitability(cvr);
+    }*/
 }

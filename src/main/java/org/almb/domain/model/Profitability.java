@@ -1,14 +1,10 @@
-package org.almb.adapter.out.persistence.entity;
+package org.almb.domain.model;
 
-import jakarta.persistence.Embeddable;
-
-@Embeddable
-public class ProfitabilityEmbeddable {
+public class Profitability {
 
     private Double revenue;
     private Double expenses;
     private Double netProfit;
-
 
     public Double getRevenue() {
         return revenue;
@@ -32,14 +28,5 @@ public class ProfitabilityEmbeddable {
 
     public void setNetProfit(Double netProfit) {
         this.netProfit = netProfit;
-    }
-
-    @Override
-    public String toString() {
-        return "ProfitabilityEmbeddable{" +
-                "revenue=" + revenue +
-                ", expenses=" + expenses +
-                ", netProfit=" + netProfit +
-                '}';
     }
 }

@@ -1,9 +1,6 @@
-package org.almb.adapter.out.persistence.entity;
+package org.almb.domain.model;
 
-import jakarta.persistence.Embeddable;
-
-@Embeddable
-public class AddressEmbeddable {
+public class Address {
 
     private String street;
     private String city;
@@ -40,15 +37,5 @@ public class AddressEmbeddable {
 
     public void setCountry(String country) {
         this.country = country;
-    }
-
-    @Override
-    public String toString() {
-        return "AddressEmbeddable{" +
-                "street='" + street + '\'' +
-                ", city='" + city + '\'' +
-                ", postalCode='" + postalCode + '\'' +
-                ", country='" + country + '\'' +
-                '}';
     }
 }

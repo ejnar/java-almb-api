@@ -1,61 +1,35 @@
 package org.almb.application.service;
 
-import org.almb.adapter.in.web.dto.Company;
-import org.almb.adapter.in.web.dto.CreateCompany;
-import org.almb.adapter.in.web.dto.Profitability;
-import org.almb.adapter.out.persistence.entity.CompanyEntity;
-import org.almb.adapter.out.persistence.repository.CompanyRepository;
-import org.almb.mapper.CompanyMapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.almb.domain.port.in.CompanyUseCase;
+import org.almb.domain.port.out.CompanyRepositoryPort;
+import org.almb.domain.model.Company;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Service
-public class CompanyService {
+public class CompanyService implements CompanyUseCase {
 
-    private static final Logger log = LoggerFactory.getLogger(CompanyService.class);
+    private final CompanyRepositoryPort repository;
 
-    private final CompanyRepository repository;
-    private final CompanyMapper mapper;
-
-    public CompanyService(CompanyRepository repository, CompanyMapper mapper) {
+    public CompanyService(CompanyRepositoryPort repository) {
         this.repository = repository;
-        this.mapper = mapper;
     }
 
-    /* public Flux<Company> getCompanies() {
+    public Flux<Company> getCompanies() {
         return repository.findAll();
-    }*/
-
-
-   public List<Company> getCompanies() {
-        return repository.findAll()
-                .stream()
-                .map(mapper::toDto)
-                .toList();
     }
 
-    public Company createCompany(CreateCompany request) {
-        CompanyEntity entity = mapper.toEntity(request);
-        repository.save(entity);
-        log.debug("Saved: {}", entity);
-        return mapper.toDto(entity);
+    public Mono<Company> getCompanyByCvr(String cvr) {
+        return repository.findByCvr(cvr);
     }
 
-    public Company getCompanyByCvr(String cvr) {
-        CompanyEntity entity =
-                repository.findByCvr(cvr)
-                        .orElseThrow();
-        return mapper.toDto(entity);
+    public Mono<Company> createCompany(Company company) {
+        return repository.save(company);
     }
 
-    public Profitability getProfitability(String cvr) {
-        CompanyEntity entity = repository.findByCvr(cvr)
-                .orElseThrow();
-        return mapper.toProfitabilityDto(entity.getProfitability());
-    }
-
+//    public Mono<Profitability> getProfitability(String cvr) {
+//        return repository.findByCvr(cvr)
+//                .map(Company::getProfitability);
+//    }
 }
