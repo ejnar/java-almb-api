@@ -26,11 +26,6 @@ public class CompanyService {
         this.mapper = mapper;
     }
 
-    /* public Flux<Company> getCompanies() {
-        return repository.findAll();
-    }*/
-
-
     public List<Company> getCompanies() {
         return repository.findAll()
                 .stream()
@@ -57,5 +52,4 @@ public class CompanyService {
                 .orElseThrow();
         return mapper.toProfitabilityDto(entity.getProfitability());
     }
-
 }
