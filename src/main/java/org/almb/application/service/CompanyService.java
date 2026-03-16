@@ -1,8 +1,8 @@
 package org.almb.application.service;
 
+import org.almb.domain.model.Company;
 import org.almb.domain.port.in.CompanyUseCase;
 import org.almb.domain.port.out.CompanyRepositoryPort;
-import org.almb.domain.model.Company;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -28,8 +28,4 @@ public class CompanyService implements CompanyUseCase {
         return repository.save(company);
     }
 
-//    public Mono<Profitability> getProfitability(String cvr) {
-//        return repository.findByCvr(cvr)
-//                .map(Company::getProfitability);
-//    }
 }

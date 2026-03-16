@@ -1,8 +1,8 @@
 package org.almb.adapter.out.persistence;
 
-import org.almb.domain.model.Company;
 import org.almb.adapter.out.persistence.mapper.CompanyMapper;
 import org.almb.adapter.out.persistence.repository.R2dbcCompanyRepository;
+import org.almb.domain.model.Company;
 import org.almb.domain.port.out.CompanyRepositoryPort;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Flux;

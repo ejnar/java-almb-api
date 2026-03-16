@@ -1,15 +1,17 @@
 # java-almb-api
 
-Reactive **Spring Boot OpenAPI Contract-First Demo** built with **Spring WebFlux**, **R2DBC**, and **OpenAPI Generator**.
+Reactive **Spring Boot OpenAPI Contract-First Demo** built with **Spring WebFlux**, **R2DBC**, and **OpenAPI Generator
+**.
 
-The project demonstrates how to generate REST API interfaces from an OpenAPI specification and implement them using a **reactive programming model**.
+The project demonstrates how to generate REST API interfaces from an OpenAPI specification and implement them using a *
+*reactive programming model**.
 
 ---
 
 # Project Overview
 
 | Property    | Value           |
-| ----------- | --------------- |
+|-------------|-----------------|
 | GroupId     | `org.almb`      |
 | ArtifactId  | `java-almb-api` |
 | Version     | `1.0-SNAPSHOT`  |
@@ -208,7 +210,7 @@ src
 # Maven Plugins
 
 | Plugin                         | Purpose                                 |
-| ------------------------------ | --------------------------------------- |
+|--------------------------------|-----------------------------------------|
 | spring-boot-maven-plugin       | Build and run Spring Boot app           |
 | openapi-generator-maven-plugin | Generate API interfaces and DTOs        |
 | maven-compiler-plugin          | Compile Java with annotation processors |

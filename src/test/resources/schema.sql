@@ -1,4 +1,4 @@
-CREATE TABLE companies
+CREATE TABLE company
 (
     id           BIGINT AUTO_INCREMENT PRIMARY KEY,
     cvr          VARCHAR(20),
