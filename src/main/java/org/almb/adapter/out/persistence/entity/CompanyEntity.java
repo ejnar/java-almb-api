@@ -14,15 +14,23 @@ public class CompanyEntity {
 
     @Column
     private String cvr;
-
     @Column
     private String phoneNumber;
-
+    @Column
+    private String street;
+    @Column
+    private String city;
+    @Column
+    private String postalCode;
+    @Column
+    private String country;
+    @Column
     private Double revenue;
-
+    @Column
     private Double expenses;
-
+    @Column
     private Double netProfit;
+
 
     public Long getId() {
         return id;
@@ -42,6 +50,38 @@ public class CompanyEntity {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getPostalCode() {
+        return postalCode;
+    }
+
+    public void setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public Double getRevenue() {

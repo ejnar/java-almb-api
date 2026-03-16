@@ -28,8 +28,4 @@ public class CompanyService implements CompanyUseCase {
         return repository.save(company);
     }
 
-//    public Mono<Profitability> getProfitability(String cvr) {
-//        return repository.findByCvr(cvr)
-//                .map(Company::getProfitability);
-//    }
 }
