@@ -4,7 +4,7 @@ Reactive **Spring Boot OpenAPI Contract-First Demo** built with **Spring WebFlux
 **.
 
 The project demonstrates how to generate REST API interfaces from an OpenAPI specification and implement them using a *
-*reactive programming model**.
+*reactive programming model**. 
 
 ---
 
@@ -30,13 +30,12 @@ The project demonstrates how to generate REST API interfaces from an OpenAPI spe
 * **OpenAPI Generator (Contract-First)**
 * **SpringDoc OpenAPI / Swagger UI**
 * **MapStruct**
-* **Testcontainers**
 
 ---
 
 # Architecture
 
-The project follows a **contract-first approach**:
+The project follows a **contract-first approach** and **hexagonal architecture**:
 
 1. Define API in an **OpenAPI YAML file**
 2. Generate **controller interfaces and DTOs**
@@ -79,7 +78,6 @@ org.almb.adapter.in.web.dto
 ```
 
 ---
-
 # Swagger UI
 
 After starting the application:
@@ -95,7 +93,6 @@ This UI allows you to:
 * View generated schema models
 
 ---
-
 # Database
 
 The project uses **H2 with R2DBC** for a reactive in-memory database.
@@ -140,7 +137,6 @@ http://localhost:8080/actuator/metrics
 
 Info:
 http://localhost:8080/actuator/info
-
 ```
 
 ---

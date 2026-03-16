@@ -92,10 +92,10 @@
             <artifactId>reactor-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!-- dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-        </dependency>
+        </dependency -->
     </dependencies>
 
     <build>
@@ -173,5 +173,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
