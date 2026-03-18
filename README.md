@@ -97,23 +97,36 @@ src/main/resources/openapi/company-profitablity.yaml
 ## ⚙️ Build & Run
 
 ### 🔧 Build project
-
 ```bash
 mvn clean install
 ```
-
 ### ▶️ Run application
-
 ```bash
 mvn spring-boot:run
 ```
+---
 
+### 🔧 Build project with docker
 
-
+### Build the jar
+```bash
+mvn clean package 
+```
+Make sure it generates:
+```bash
+target/java-almb-api.jar
+```
+### Build docker image
+```bash
+docker build -t java-almb-api .
+```
+### ▶️ Run Container
+```bash
+docker run -p 8080:8080 java-almb-api
+```
 ---
 
 ## 🌐 API Documentation
-
 Swagger UI available at:
 
 ```
